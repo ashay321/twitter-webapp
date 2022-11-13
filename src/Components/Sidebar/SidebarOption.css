@@ -24,3 +24,7 @@
 .sidebarOptions__active{
     color: #50b7f5;
 }
+
+.sidebarOptionsIcon {
+    padding: 20px;
+}
