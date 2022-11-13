@@ -1,0 +1,28 @@
+.admin__header{
+    
+}
+
+.admin__nav{
+    height: 90px;
+    background-color: rgb(198, 212, 210);
+    padding: 20px 30px  30px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.admin__nav > h2 {
+    line-height: 30px;
+    font-size: 35px;
+    font-weight: bold;
+    color: white;
+}
+
+.twitter__logo{
+    height: 70px;
+    margin-left: 50px;
+}
+
+.twitter__logout{
+    height: 35px;
+    background-color: var(--twitter-color) !important;
+}

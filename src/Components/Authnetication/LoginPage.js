@@ -1,5 +1,5 @@
 import React from "react";
-import "./Login.css";
+import "./LoginPage.css";
 import twitter from "../../Asserts/Images/twitter.png";
 import { Form, Input, Checkbox, Button } from "antd";
 
