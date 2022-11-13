@@ -1,0 +1,144 @@
+.container1{
+    padding: 20px;
+    position: relative;
+}
+.top{
+    display: flex;
+    justify-content: space-between;
+    /* margin-top: calc(var(--profile-image-size)/-2); */
+}
+
+.image{
+    width: var(--profile-image-size);
+    height: var(--profile-image-size);
+    border-radius: 50%;
+    overflow: hidden;
+    border: 4px snow;
+    background-color: wheat;
+
+    /* img {
+        width: 100%;
+        height: 100;
+        object-fit: cover;
+
+    } */
+}
+
+.actions{
+    position: relative;
+    top: 250px;
+    /* display: flex; */
+}
+.actionbutton{
+    border: 1px solid #777;
+    margin-right: 10px;
+    width: 100px;
+    height: 20px;
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.details{
+    color: #888;
+    margin-top: 20px;
+}
+.username{
+    color: black;
+    font-weight: bold;
+}
+
+.handle{
+    display: flex;
+    margin-top: 2px;
+    font-size: 15px;
+}
+
+.userbio{
+    color: black;
+    margin-top: 10px;
+    text-decoration: none;
+    
+}
+
+.userjoined{
+    display: flex;
+    align-items: center;
+    margin-top: 15px;
+    font-size: 15px;
+}
+
+.joindate{
+    display: flex;
+    align-items: center;
+    margin-top: 5px;
+    font-size: 15px;
+}
+
+.follows{
+    font-size: 15px;
+    display: flex;
+    margin-top: 15px;
+}
+
+.following{
+    font-size: 13px;
+    margin-top: 15px;
+}
+
+.followers{
+    margin-left: 20px;
+    font-size: 13px;
+    margin-top: 15px;
+}
+
+.container2{
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr 1fr;
+    border-bottom: 1px solid #555;
+    width: 100%;
+}
+
+.tab{
+    color: #777;
+    padding: 0 35px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 15px;
+
+    /* a:hover {
+        background-color: #111;
+    } */
+
+}
+
+.tablabel{
+    /* display: flex; */
+    position: absolute;
+    width: 100%;
+    padding: 20px 7px;
+    width: 100%;
+    height: 30px;
+    border-radius: 40px;
+    margin-top: 50px;
+    content: '';
+
+    /* align-items: center; */
+
+    /* a.active {
+        color: black;
+
+        a::after {
+            content: '';
+            height: 3px;
+            width: 100%;
+            background-color: var(--theme-color);
+            border-radius: 40px;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+        } */
+}
