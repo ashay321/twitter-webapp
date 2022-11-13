@@ -61,8 +61,7 @@ function ProfilePage() {
    return (
     <div style={{ padding: "10px 30px" }}>
     <Grid container>
-      <Grid item xs={3}></Grid>
-      <Grid item xs={5}>
+      <Grid item>
         <Grid container spacing={3} display="flex" alignItems="center">
           <Grid item xs={2}>
             <ArrowBackIcon />

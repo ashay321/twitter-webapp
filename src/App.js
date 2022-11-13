@@ -11,6 +11,7 @@ import {
 } from "react-router-dom";
 import LoginPage from "./Components/Authnetication/LoginPage";
 import SignupPage from "./Components/Authnetication/SignupPage";
+import ProfilePage from "./Components/Pages/ProfilePage";
 
 function App() {
   return (
@@ -77,6 +78,7 @@ function App() {
           element={
             <div className="App">
               <Sidebar />
+              <ProfilePage/>
             </div>
           }
         />
