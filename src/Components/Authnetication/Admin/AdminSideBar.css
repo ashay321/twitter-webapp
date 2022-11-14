@@ -1,5 +1,11 @@
 .admin__sideBar{
     height: 100vh;
-    background-color: aqua;
+    background-color:aqua;
     width: 250px;
+    padding: 50px;
+}
+
+.sidebar__list > .users__list{
+    display: flex;
+    flex-direction: row;
 }
