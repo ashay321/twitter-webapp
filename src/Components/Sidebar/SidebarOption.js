@@ -11,10 +11,8 @@ export default function SidebarOption({ active, text, Icon, navigationPath }) {
         navigate(navigationPath);
       }}
     >
-      <div>
-        {Icon}
+        <div className="sidebarOptionsIcon">{Icon}</div>
         <h2>{text}</h2>
-      </div>
     </div>
   );
 }
