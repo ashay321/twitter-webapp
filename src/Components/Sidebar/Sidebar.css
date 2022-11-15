@@ -29,3 +29,7 @@
     margin: 0;
     padding: 40;
 }
+
+.modal-box::-webkit-scrollbar {
+    display: none;
+}
