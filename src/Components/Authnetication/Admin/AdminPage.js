@@ -4,7 +4,7 @@ import "./AdminPage.css";
 import freetwitter from "../../../Asserts/Images/freetwitter.png";
 import AdminSideBar from "./AdminSideBar";
 import UsersPage from "./UsersListPage";
-import UsersRequestPage from "./UsersRequestPage";
+// import UsersRequestPage from "./UsersRequestPage";
 export default function AdminPage() {
   return (
     <div className="admin__header">
@@ -20,7 +20,7 @@ export default function AdminPage() {
           <AdminSideBar />
         </div>
         <div className="users__list">
-          <UsersRequestPage />
+          <UsersPage />
         </div>
       </div>
     </div>

@@ -18,7 +18,7 @@ function UsersPage() {
         <tbody>
           <tr>
             <td>Anom</td>
-            <td>19</td>
+            <td>2022-19-10</td>
             <td>anomol@gmail.com</td>
             <td>30</td>
             <td>50</td>
