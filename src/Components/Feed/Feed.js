@@ -1,55 +1,50 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Post from "../Post/Post";
 import TweetBox from "../TweetBox/TweetBox";
 import "./Feed.css";
+import axios from '../../axios';
+import { useStateValue } from '../../StateProvider';
+
 function Feed() {
+  const [feed, setFeed] = useState([]);
+  const [{userId}] = useStateValue();
+
+  const getUserFeed = async() => {
+
+    const response = await axios({
+      method: 'get',
+      url: `/user/${userId}/feeds`,
+    })
+    console.log(response.data);
+    setFeed(response.data);
+  }
+
+  useEffect(() => {
+    getUserFeed();
+  }, [])
+
   return (
     <div className="feed">
       <div className="feed__header">
         <h2>Home</h2>
       </div>
-      <TweetBox />
-      <Post
-        displayName="Ganesh ppk"
-        username="Ganesh ppk"
-        verified={true}
-        text="Building a sasta twitter application"
-        avatar="https://kajabi-storefronts-production.global.ssl.fastly.net/kajabi-storefronts-production/themes/284832/settings_images/rLlCifhXRJiT0RoN2FjK_Logo_roundbackground_black.png"
-        image="https://media.gq.com/photos/57eac35d9228bbed3f6f4ee5/16:9/w_2560%2Cc_limit/elon-musk-is-a-rocket.jpg"
-      />
-      <Post
-        displayName="Ganesh ppk"
-        username="Ganesh ppk"
-        verified={true}
-        text="Building a sasta twitter application"
-        avatar="https://kajabi-storefronts-production.global.ssl.fastly.net/kajabi-storefronts-production/themes/284832/settings_images/rLlCifhXRJiT0RoN2FjK_Logo_roundbackground_black.png"
-        image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1prwlaIHckvemT84pP_AP-WkMfFr1ao1q4mgqJEKx&s"
-      />
-      <Post
-        displayName="Ganesh ppk"
-        username="Ganesh ppk"
-        verified={true}
-        text="Building a sasta twitter application"
-        avatar="https://kajabi-storefronts-production.global.ssl.fastly.net/kajabi-storefronts-production/themes/284832/settings_images/rLlCifhXRJiT0RoN2FjK_Logo_roundbackground_black.png"
-        image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1prwlaIHckvemT84pP_AP-WkMfFr1ao1q4mgqJEKx&s"
-      />
-      <Post
-        displayName="Ganesh ppk"
-        username="Ganesh ppk"
-        verified={true}
-        text="Building a sasta twitter application"
-        avatar="https://kajabi-storefronts-production.global.ssl.fastly.net/kajabi-storefronts-production/themes/284832/settings_images/rLlCifhXRJiT0RoN2FjK_Logo_roundbackground_black.png"
-        image="https://uploads.dailydot.com/2018/11/elon-musk-on-mars.jpg?auto=compress&fm=pjpg"
-      />
-      <Post
-        displayName="Ganesh ppk"
-        username="Ganesh ppk"
-        verified={true}
-        text="Building a sasta twitter application"
-        avatar="https://kajabi-storefronts-production.global.ssl.fastly.net/kajabi-storefronts-production/themes/284832/settings_images/rLlCifhXRJiT0RoN2FjK_Logo_roundbackground_black.png"
-        image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1prwlaIHckvemT84pP_AP-WkMfFr1ao1q4mgqJEKx&s"
-      />
-      
+
+      {
+        feed?.map(post => {
+          return <Post
+            displayName={post.createdUser.name}
+            username={post.createdUser.userName}
+            verified={post.isVerified ? true : false}
+            text={post.text}
+            avatar={post.createdUser.avatar}
+            image={post.image}
+            tweetId={post.tweetId}
+            numOfLikes={post.numberOFLikes}
+            numOfTweets={post.numberOFTweets}
+            numOfComments={post.numberOfComments}
+          />
+        })
+      }      
     </div>
   );
 }
