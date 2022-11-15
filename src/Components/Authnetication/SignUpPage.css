@@ -7,11 +7,19 @@
     box-shadow: 0 0 40px rgba(0,0,0,0.16);;
 }
 
+.left_side , .logo{
+    display: flex;
+    flex-direction: column;
+} 
+
 .header > h2{
     font-weight: 900;
     font-size: large;
     font-style:normal;
     margin-bottom: 30px;
+}
+.input__fields{
+
 }
 .input__fields > input{
     border-top: 0;
@@ -23,11 +31,11 @@
     width: 60%;
 }
 
-.twitter__logo{
-    height: 200px;
-    width: 200px;
-    margin-right: 30px;
+.logo{
+    margin-top: 80px;
+    margin-right: 80px;
 }
+
 
 .header-primary {
     display: flex;
@@ -39,7 +47,6 @@
 
 .date{
     margin-top: 30px;
-
 }
 
 .text{

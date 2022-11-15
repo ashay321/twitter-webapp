@@ -5,14 +5,16 @@ import Widgets from "./Components/Widgets/Widgets";
 import {
   BrowserRouter as Router,
   Route,
-  Link,
   Routes,
   Navigate,
 } from "react-router-dom";
 import LoginPage from "./Components/Authnetication/LoginPage";
 import SignupPage from "./Components/Authnetication/SignupPage";
+import AdminPage from "./Components/Authnetication/Admin/AdminPage";
 import ProfilePage from "./Components/Pages/ProfilePage";
 import DetailedPost from "./Components/Post/DetailedPost";
+import SettingsPage from "./Components/Pages/SettingsPage";
+import NotificationPage from "./Components/Pages/NotificationPage";
 
 function App() {
   return (
@@ -35,7 +37,8 @@ function App() {
             </div>
           }
         />
-
+        <Route path="/admin" element={<AdminPage />} />
+        
         <Route
           path="/home"
           element={
@@ -61,6 +64,7 @@ function App() {
           element={
             <div className="App">
               <Sidebar />
+              <NotificationPage/>
             </div>
           }
         />
@@ -89,6 +93,7 @@ function App() {
           element={
             <div className="App">
               <Sidebar />
+              <SettingsPage />
             </div>
           }
         />

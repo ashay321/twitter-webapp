@@ -1,0 +1,17 @@
+.header__secondary{
+    margin-left: 100px;
+    font-size: 30px;
+}
+
+.bar{
+    margin-top: 30px;
+    width: 550px;
+    border-bottom: 0.2px solid black;
+}
+
+
+
+
+/* .notification__bar{
+    margin-top: 500px;
+} */
