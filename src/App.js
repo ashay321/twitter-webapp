@@ -12,6 +12,7 @@ import {
 import LoginPage from "./Components/Authnetication/LoginPage";
 import SignupPage from "./Components/Authnetication/SignupPage";
 import ProfilePage from "./Components/Pages/ProfilePage";
+import DetailedPost from "./Components/Post/DetailedPost";
 
 function App() {
   return (
@@ -88,6 +89,16 @@ function App() {
           element={
             <div className="App">
               <Sidebar />
+            </div>
+          }
+        />
+
+        <Route
+          path="/tweet/:id"
+          element={
+            <div className="App">
+              <Sidebar />
+              <DetailedPost/>
             </div>
           }
         />
