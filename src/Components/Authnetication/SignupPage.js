@@ -9,11 +9,13 @@ function SignupPage() {
     <div className="signUp__page">
       <div className="header">
         <div className="header-primary">
-          <div>
+          <div className="left_side">
             <h2>Create Your new Account</h2>
             <div className="input__fields">
               <input className="input" placeholder="Name" type="text" />
+              <input className="input" placeholder="UserName" type="text" />
               <input className="input" placeholder="Email" type="email" />
+              <input className="input" placeholder="Password" type="password" />
             </div>
             <div className="dateOfBirth">
               <h3>Date of birth</h3>

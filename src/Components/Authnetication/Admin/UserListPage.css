@@ -1,0 +1,19 @@
+.users__list{
+    padding: 30px;
+}
+table {
+    border: 0.4px solid forestgreen;
+    width: 1000px;
+    height: 20px;
+    padding: 50px;
+  }
+    
+  th {
+    border-bottom: 1px solid black;
+    border: 1px solid black;
+  }
+    
+  td {
+    text-align: center;
+    border: 1px solid blue;
+  }
