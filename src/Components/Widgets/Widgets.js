@@ -9,6 +9,7 @@ import {
   TwitterHashtagButton,
   TwitterFollowButton,
 } from "react-twitter-embed";
+import WhoToFollow from "./WhoToFollow";
 
 function Widgets() {
   return (
@@ -17,7 +18,7 @@ function Widgets() {
         <SearchIcon className="widgets__searchIcon" />
         <input type="text" placeholder="Search Twitter" className="input" />
       </div>
-      <div className="widgets__widgetContainer">
+      {/* <div className="widgets__widgetContainer">
         <h2>What's happening</h2>
         <TwitterTweetEmbed tweetId={"858551177860055040"} />
         <TwitterTimelineEmbed sourceType="profile" screenName="cleverqazi" />
@@ -28,6 +29,9 @@ function Widgets() {
         <TwitterMentionButton screenName={"saurabhnemade"} />
         <TwitterHashtagButton tag={"cybersecurity"} />
         <TwitterFollowButton />
+      </div> */}
+      <div className="who_to__follow">
+          <WhoToFollow />
       </div>
     </div>
   );

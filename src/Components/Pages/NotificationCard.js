@@ -2,12 +2,7 @@ import React from "react";
 import "./NotificationCard.css";
 import Avatar from "@mui/material/Avatar";
 
-
 function NotificationCard() {
-
-
-
-
   return (
     <div className="notification__card">
       <div className="bar__card">
