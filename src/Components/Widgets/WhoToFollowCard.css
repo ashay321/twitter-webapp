@@ -1,0 +1,36 @@
+.bar__card{
+    display: flex;
+    gap: 10px;
+    margin-left: 50px;
+    margin-top: 10px;
+    height: 170px;
+    width: 350px !important;
+    box-shadow: 0 0 40px rgba(0,0,0,0.16);
+    border-radius: 15px;
+}
+
+.avatar{
+    margin-top: 10px;
+    font-size: small !important;
+    margin-left: 10px;
+}
+
+.username{
+    font-size: 5px;    
+}
+
+.follow__btn{
+    width: 80px;
+    border: 1px solid burlywood;
+    margin-top: 15px;
+    margin-left: 5px;
+    margin-bottom: 5px;
+    padding: 12px;
+    border-radius: 20px;
+    background-color: black;
+}
+
+.follow__btn > h3 {
+    color: white;
+    cursor: pointer;
+}
