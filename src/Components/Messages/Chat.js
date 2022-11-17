@@ -11,13 +11,14 @@ import axios from '../../axios';
 function Chat() {
     const [seed, setSeed] = useState("");
     const [input, setInput] = useState("");
-    const {roomId} = useParams();
+    const {receiverId} = useParams();
     const [roomName, setRoomName] = useState("");
     const [messages, setMessages] = useState([]);
     const [{userId}, dispatch] = useStateValue();
 
     const getAllMessages = async() => {
-        let response = await axios.get(`/user/message/1/2`);
+        console.log(receiverId);
+        let response = await axios.get(`/user/message/${userId}/${receiverId}`);
 
         if(response.status === 200) {
             console.log(response.data.length)
@@ -25,16 +26,32 @@ function Chat() {
         }
     }
 
+    const getRoomName = async() => {
+        let response = await axios.get(`/user/${receiverId}`)
+
+        if(response.status === 200) {
+            setRoomName(response.data.name)
+        }
+    }
+
     useEffect(()=>{
+        getRoomName();
         getAllMessages();
-    },[])
+    },[receiverId])
 
     useEffect(() => {
         setSeed(Math.floor(Math.random() * 5000));        
     }, []);
 
-    const sendMessage = (e) => {
+    const sendMessage = async(e) => {
         e.preventDefault();
+
+        await axios.post('/user/message', {
+            text: input,
+            senderId: userId,
+            recieverId: receiverId
+        })
+        getAllMessages();
         setInput("");
     }
 
@@ -68,7 +85,7 @@ function Chat() {
             <div className="chat__body">
                 {messages.map(message => (            
                     <p className={`chat__message ${ message.senderId === userId && 'chat__receiver'}`}>
-                        <span className="chat__name">{"Ashay"}</span>
+                        <span className="chat__name">{message.sender.name}</span>
                         {message.text}
                         <span className="chat__timestamp">{new Date(message.messageDate).toUTCString()}</span>
                     </p>

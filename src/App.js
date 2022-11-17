@@ -78,7 +78,7 @@ function App() {
         />
 
         <Route
-          path="/messages/:roomId"
+          path="/messages/:receiverId"
           element={
             <div className="App">
               <Sidebar />

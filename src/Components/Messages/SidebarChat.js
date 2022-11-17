@@ -3,20 +3,21 @@ import React, { useEffect, useState } from 'react'
 import "./SidebarChat.css";
 import { Link } from "react-router-dom";
 
-function SidebarChat({id, name, addNewChat}) {
+function SidebarChat({receiverId, name, addNewChat}) {
     const [seed, setSeed] = useState("");
     const [messages, setMessages] = useState("");
     
     useEffect(() => {
         
-    }, [id]);
+    }, []);
 
+    
     useEffect(() => {
         setSeed(Math.floor(Math.random() * 5000));        
     }, []);
 
     return true ? (
-        <Link to={`/messages/${id}`} key={id}>
+        <Link to={`/messages/${receiverId}`} key={receiverId}>
             <div className="sidebarChat">
                 <Avatar src={`https://avatars.dicebear.com/api/human/${seed}.svg`}/>
                 <div className="sidebarChat__info">

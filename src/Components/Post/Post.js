@@ -54,10 +54,7 @@ const Post = forwardRef(
 
     const removeBookmark = async() => {
       setBookmarked(!bookmarked);
-      await axios.delete('/user/bookmark', {
-        userId: userId,
-        tweetId: tweetId
-      });
+      await axios.delete(`/user/${userId}/bookmark/${tweetId}`);
     }
 
     const intialLikeState = async() => {
