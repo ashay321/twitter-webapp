@@ -1,6 +1,23 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./UserListPage.css";
+import axios from "../../../axios";
+
 function UsersPage() {
+  const [users, setUsers] = useState([]);
+
+  const getUsersData = async() => {
+    let response = await axios.get("/user")
+
+    if(response.status === 200) {
+      // console.log(respo)
+      setUsers(response.data);
+    }
+  }
+
+  useEffect(() => {
+    getUsersData();
+  },[])
+
   return (
     <div className="users__list">
       <table>
@@ -8,7 +25,7 @@ function UsersPage() {
           <tr>
             <th>Name</th>
             <th>DOB</th>
-            <th>Email</th>
+            <th>Username</th>
             <th>Followers</th>
             <th>Following</th>
             <th>Tweets</th>
@@ -16,15 +33,19 @@ function UsersPage() {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>Anom</td>
-            <td>2022-19-10</td>
-            <td>anomol@gmail.com</td>
-            <td>30</td>
-            <td>50</td>
-            <td>60</td>
-            <td>150</td>
-          </tr>
+          {
+            users.map(user => {
+              return <tr>
+                <td>{user.name}</td>
+                <td>{user.dob}</td>
+                <td>{user.userName}</td>
+                <td>{user.numberOfFollower}</td>
+                <td>{user.numberOfFollowing}</td>
+                <td>...</td>
+                <td>...</td>
+              </tr>
+            })
+          }
         </tbody>
       </table>
     </div>
