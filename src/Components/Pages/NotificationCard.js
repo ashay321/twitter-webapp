@@ -2,15 +2,16 @@ import React from "react";
 import "./NotificationCard.css";
 import Avatar from "@mui/material/Avatar";
 
-function NotificationCard() {
+
+function NotificationCard({avatar, username, msg}) {
   return (
     <div className="notification__card">
       <div className="bar__card">
-        <Avatar className="avatar" />
+        <Avatar src={avatar} className="avatar" />
         <div>
-          <span className="username">username</span>
+          <span className="username">{username}</span>
           <div>
-            <span>Username is liked your tweet </span>
+            <span>{msg} </span>
           </div>
         </div>
       </div>
