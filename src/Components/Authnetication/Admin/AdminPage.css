@@ -1,21 +1,32 @@
-.admin__header{
-    
-}
+/* .admin__header {
+    position: sticky;
+    top: 0 !important;
+    z-index: 1 !important;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    border-bottom: 1px solid lightgray;
+    background-color: white;
+} */
 
 .admin__nav{
     height: 90px;
     width: 100%;
-    background-color: rgb(198, 212, 210);
+    background-color: white;
     padding: 20px 30px  30px;
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    z-index: 1 !important;
+    border-bottom: 1px solid lightgray;
 }
 
 .admin__nav > h2 {
     line-height: 30px;
     font-size: 35px;
     font-weight: bold;
-    color: white;
+    /* color: white; */
 }
 
 .twitter__logo{
