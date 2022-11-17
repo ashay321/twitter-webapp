@@ -1,5 +1,5 @@
 export const initialState = {
-    userId: 1
+    userId: null
 }
 
 function reducer(state, action) {
@@ -7,7 +7,7 @@ function reducer(state, action) {
         case "SET_USER":
             return {
                 ...state,
-                userId: action.user
+                userId: action.userId
             }
         default:
             return state;
