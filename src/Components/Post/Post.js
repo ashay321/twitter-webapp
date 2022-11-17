@@ -1,4 +1,4 @@
-import React, { forwardRef, useState } from "react";
+import React, { forwardRef, useEffect, useState } from "react";
 import "./Post.css";
 import Avatar from "@mui/material/Avatar";
 import VerifiedUserIcon from "@mui/icons-material/VerifiedUser";
@@ -7,16 +7,17 @@ import RepeatIcon from "@mui/icons-material/Repeat";
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import PublishIcon from "@mui/icons-material/Publish";
-import { FormControl, IconButton } from "@mui/material";
+import { Box, FormControl, IconButton, Modal } from "@mui/material";
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
 import { async } from "@firebase/util";
 import axios from "../../axios";
 import { useNavigate } from "react-router-dom";
 import { useStateValue } from "../../StateProvider";
+import AddCommentBox from "../AddComment/AddCommentBox";
 
 const Post = forwardRef(
-  ({ displayName, username, verified, text, image, avatar, tweetId, numOfLikes, numOfComments, numOfTweets }, ref) => {
+  ({ displayName, username, verified, text, image, avatar, tweetId, numOfLikes, numOfComments, numOfTweets, isComment=false }, ref) => {
 
     let navigate = useNavigate();
     const [{userId}] = useStateValue();
@@ -26,6 +27,7 @@ const Post = forwardRef(
     const [numberOfLikes, setNumberOfLikes] = useState(numOfLikes);
     const [numberOfComments, setNumberOfComments] = useState(numOfComments);
     const [numberOfTweets, setNumberOfTweets] = useState(numOfTweets);
+    const [commentBox, setCommentBox] = useState(false);
 
     const likePost = async () => {
       setLiked(!liked);
@@ -52,7 +54,32 @@ const Post = forwardRef(
 
     const removeBookmark = async() => {
       setBookmarked(!bookmarked);
+      await axios.delete('/user/bookmark', {
+        userId: userId,
+        tweetId: tweetId
+      });
     }
+
+    const intialLikeState = async() => {
+      let response = await axios.get(`/user/${userId}/tweets/${tweetId}`)
+
+      if(response.status === 200) {
+        setLiked(response.data);
+      }
+    }
+
+    const intialBookmarkState = async() => {
+      let response = await axios.get(`/user/${userId}/bookmark/${tweetId}`)
+
+      if(response.status === 200) {
+        setBookmarked(response.data);
+      }
+    }
+
+    useEffect(() => {
+      intialLikeState();
+      intialBookmarkState();
+    }, [])
 
     return (
       <div className="post" ref={ref} >
@@ -79,9 +106,10 @@ const Post = forwardRef(
           </div> */}
           <img src={image} alt="" onClick={() => navigate(`/tweet/${tweetId}` )}/>
 
-          <div className="post__footer">
+          {
+          !isComment ? <div className="post__footer">
             <div className="post__conversations">
-              <IconButton><ChatBubbleOutlineIcon fontSize="small" /></IconButton>
+              <IconButton onClick={() => setCommentBox(true)}><ChatBubbleOutlineIcon fontSize="small" /></IconButton>
               <span>{numberOfComments}</span>
             </div>
             
@@ -128,11 +156,40 @@ const Post = forwardRef(
                     )
                 }
             </div>
-          </div>
-        </div>
+          </div> : <div></div>
+          }
+        </div> 
+        
+
+        <Modal
+          open={commentBox}
+          onClose={() => setCommentBox(false)}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box className="modal-box" sx={style}>
+            <AddCommentBox tweetId={tweetId}/>
+          </Box>
+        </Modal>
       </div>
     );
   }
 );
+
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  // width: 900,
+  bgcolor: 'background.paper',
+  // border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
+  maxHeight: 900,
+  overflowY: 'scroll',
+  borderRadius: 7
+};
+
 
 export default Post;
