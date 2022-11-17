@@ -13,31 +13,48 @@ import SignupPage from "./Components/Authnetication/SignupPage";
 import AdminPage from "./Components/Authnetication/Admin/AdminPage";
 import ProfilePage from "./Components/Pages/ProfilePage";
 import DetailedPost from "./Components/Post/DetailedPost";
-import SettingsPage from "./Components/Pages/SettingsPage";
+import SettingsPage from "./Components/Pages/Settings/SettingsPage";
 import NotificationPage from "./Components/Pages/NotificationPage";
+import ExplorePage from "./Components/Pages/ExplorePage";
+import BookmarksPage from "./Components/Pages/BookmarksPage";
+import AdminSideBar from "./Components/Authnetication/Admin/AdminSideBar";
+import UsersRequestPage from "./Components/Authnetication/Admin/UsersRequestPage";
+import UsersListPage from "./Components/Authnetication/Admin/UsersListPage";
+import MessagesPage from "./Components/Messages/MessagesPage";
+import { useStateValue } from "./StateProvider";
 
 function App() {
-  return (
-    <Router>
-      <Routes>
-        <Route
-          path="/login"
-          element={
-            <div className="App">
-              <LoginPage />
-            </div>
-          }
-        />
+  const [{userId}] = useStateValue();
 
-        <Route
-          path="/signup"
-          element={
-            <div className="App">
-              <SignupPage />
-            </div>
-          }
-        />
-        <Route path="/admin" element={<AdminPage />} />
+  return (<div>
+        {
+          !userId 
+          ? <Router>
+            <Routes>
+              <Route
+                path="/login"
+                element={
+                  <div className="App">
+                    <LoginPage />
+                  </div>
+                }
+              />
+
+              <Route
+                path="/signup"
+                element={
+                  <div className="App">
+                    <SignupPage />
+                  </div>
+                }
+              />
+            <Route path="*" element={<Navigate to="/login" />} />
+
+            </Routes>
+          </Router> : 
+          
+          <Router><Routes>
+            <Route path="/admin" element={<AdminPage />} />
         
         <Route
           path="/home"
@@ -51,10 +68,21 @@ function App() {
         />
 
         <Route
-          path="/explore"
+          path="/messages"
           element={
             <div className="App">
               <Sidebar />
+              <MessagesPage/>
+            </div>
+          }
+        />
+
+        <Route
+          path="/messages/:roomId"
+          element={
+            <div className="App">
+              <Sidebar />
+              <MessagesPage/>
             </div>
           }
         />
@@ -70,10 +98,11 @@ function App() {
         />
 
         <Route
-          path="/messages"
+          path="/bookmarks"
           element={
             <div className="App">
               <Sidebar />
+              <BookmarksPage/>
             </div>
           }
         />
@@ -108,9 +137,28 @@ function App() {
           }
         />
 
+        <Route
+          path="/admin/requests"
+          element={
+            <div className="App">
+              <AdminPage children={<UsersRequestPage/>}/>
+            </div>
+          }
+        />
+
+        <Route
+          path="/admin/users"
+          element={
+            <div className="App">
+              <AdminPage children={<UsersListPage/>}/>
+            </div>
+          }
+        />
+
         <Route path="*" element={<Navigate to="/home" />} />
-      </Routes>
-    </Router>
+            </Routes></Router>
+        } 
+    </div>
   );
 }
 

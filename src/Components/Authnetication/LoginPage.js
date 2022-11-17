@@ -1,9 +1,33 @@
-import React from "react";
+import React, { useState } from "react";
 import "./LoginPage.css";
 import twitter from "../../Asserts/Images/twitter.png";
 import { Form, Input, Checkbox, Button } from "antd";
+import axios from "../../axios"
+import { useNavigate } from "react-router-dom";
+import { useStateValue } from "../../StateProvider";
 
 const Login = () => {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [{userId}, dispatch] = useStateValue();
+  let navigate = useNavigate();
+
+  const login = async() => {
+    let response = await axios.post(`/login?username=${username}&password=${password}`,)
+
+    if(response.status === 200) {
+      let userResponse = await axios.get(`/user/username/${username}`);
+
+      dispatch({
+        type: "SET_USER",
+        userId: userResponse.data.userId
+      })
+      navigate("/home");
+    } else {
+      alert("Invalid username or password")
+    }
+  }
+
   return (
     <div className="login-page">
       <div className="login-box">
@@ -18,14 +42,14 @@ const Login = () => {
             name="username"
             rules={[{ required: true, message: "Please input your username!" }]}
           >
-            <Input placeholder="Username" />
+            <Input placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)}/>
           </Form.Item>
 
           <Form.Item
             name="password"
             rules={[{ required: true, message: "Please input your password!" }]}
           >
-            <Input.Password placeholder="Password" />
+            <Input.Password placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)}/>
           </Form.Item>
 
           <Form.Item name="remember" valuePropName="checked">
@@ -37,12 +61,13 @@ const Login = () => {
               type="primary"
               htmlType="submit"
               className="login-form-button"
+              onClick={login}
             >
               LOGIN
             </Button>
-            <div className="signUp__page">
+            <div className="signUp__page" onClick={() => navigate('/signup')}>
               Don't have an Account?
-              <span className="signUp__here__btn">SignUp here</span>
+              <span className="signUp__here__btn">Signup</span>
             </div>
           </Form.Item>
 
