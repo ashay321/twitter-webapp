@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import HomeIcon from "@mui/icons-material/Home";
 import ExploreIcon from "@mui/icons-material/Explore";
@@ -8,8 +8,12 @@ import PersonIcon from "@mui/icons-material/Person";
 import SettingsIcon from "@mui/icons-material/Settings";
 import "./Sidebar.css";
 import SidebarOption from "./SidebarOption";
-import { Button } from "@mui/material";
+import { Box, Button, Modal, Typography } from "@mui/material";
+import TweetBox from "../TweetBox/TweetBox";
+import { BookmarkOutlined } from "@mui/icons-material";
 function Sidebar() {
+  const [tweetBox, setTweetBox] = useState(false);
+
   return (
     <div className="sidebar">
       {/* Twitter Icon */}
@@ -24,9 +28,9 @@ function Sidebar() {
         navigationPath="/home"
       />
       <SidebarOption
-        Icon={<ExploreIcon />}
-        text="Explore"
-        navigationPath="/explore"
+        Icon={<MailOutlineIcon />}
+        text="Messages"
+        navigationPath="/messages"
       />
       <SidebarOption
         Icon={<NotificationsIcon />}
@@ -34,9 +38,9 @@ function Sidebar() {
         navigationPath="/notifications"
       />
       <SidebarOption
-        Icon={<MailOutlineIcon/>}
-        text="Messages"
-        navigationPath="/messages"
+        Icon={<BookmarkOutlined/>}
+        text="Bookmarks"
+        navigationPath="/bookmarks"
       />
       <SidebarOption
         Icon={<PersonIcon />}
@@ -51,11 +55,40 @@ function Sidebar() {
 
       {/* Tweet Button */}
 
-      <Button variant="outlined" className="tweet__btn">
+      <Button variant="outlined" className="tweet__btn" onClick={() => setTweetBox(true)}>
         Tweet
       </Button>
+
+      <Modal
+        open={tweetBox}
+        onClose={() => setTweetBox(false)}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box className="modal-box" sx={style}>
+          <TweetBox/>
+        </Box>
+      </Modal>
     </div>
   );
 }
+
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  // width: 900,
+  bgcolor: 'background.paper',
+  // border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
+  maxHeight: 900,
+  overflowY: 'scroll',
+  borderRadius: 7
+};
+
+
+
 
 export default Sidebar;

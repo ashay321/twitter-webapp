@@ -6,6 +6,9 @@ export default function WhoToFollow() {
     <div className='whotofollow__container'>
         <h3 className='header'>Who to follow</h3>
         <WhoToFollowCard />
+        <WhoToFollowCard />
+        <WhoToFollowCard />
+        <WhoToFollowCard />
     </div>
   )
 }

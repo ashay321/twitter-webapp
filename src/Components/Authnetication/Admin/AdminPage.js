@@ -5,7 +5,7 @@ import freetwitter from "../../../Asserts/Images/freetwitter.png";
 import AdminSideBar from "./AdminSideBar";
 import UsersPage from "./UsersListPage";
 // import UsersRequestPage from "./UsersRequestPage";
-export default function AdminPage() {
+export default function AdminPage({children}) {
   return (
     <div className="admin__header">
       <div className="admin__nav">
@@ -20,7 +20,7 @@ export default function AdminPage() {
           <AdminSideBar />
         </div>
         <div className="users__list">
-          <UsersPage />
+          {children}
         </div>
       </div>
     </div>

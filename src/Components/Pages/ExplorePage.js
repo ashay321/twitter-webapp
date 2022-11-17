@@ -1,19 +1,18 @@
 import React, { useEffect, useState } from "react";
 import Post from "../Post/Post";
 import TweetBox from "../TweetBox/TweetBox";
-import "./Feed.css";
+import "./ExplorePage.css";
 import axios from '../../axios';
 import { useStateValue } from '../../StateProvider';
 
-function Feed() {
+function ExplorePage() {
   const [feed, setFeed] = useState([]);
-  const [{userId}] = useStateValue();
 
   const getUserFeed = async() => {
 
     const response = await axios({
       method: 'get',
-      url: `/user/${userId}/feeds`,
+      url: `/user/tweets`,
     })
     console.log(response.data);
     setFeed(response.data);
@@ -49,4 +48,4 @@ function Feed() {
   );
 }
 
-export default Feed;
+export default ExplorePage;
