@@ -24,7 +24,6 @@ export default function Notification() {
       <div className="notifications__bar">
         <span className="header__secondary">Notification</span>
       </div>
-      <hr className="bar" />
 
       {
         notifications.map(notification => {

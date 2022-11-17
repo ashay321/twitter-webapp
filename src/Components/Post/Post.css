@@ -35,7 +35,11 @@
     margin-bottom: 10px;
     font-size: 15px;
 }
-  
+
+.post__headerText,
+.post__headerDescription {
+    display: flex;
+}
 .post__headerText > h3 {
     font-size: 15px;
     margin-bottom: 5px;
