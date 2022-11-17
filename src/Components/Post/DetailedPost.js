@@ -2,35 +2,50 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from "react-router-dom";
 import Post from './Post';
 import axios from "../../axios"
-import { async } from '@firebase/util';
 import './DetailedPost.css'
 
 function DetailedPost() {
     const { id } = useParams();
+    const [tweetDetails, setTweetDetails] = useState({});
     const [comments, setComments] = useState([]);
 
     const setCommentData = async() => {
-        const response = await axios.get('/user/tweets/1/comments');
+        const response = await axios.get(`/user/tweets/${id}/comments`);
 
         if(response.status === 200) {
+            console.log(response.data)
             setComments(response.data);
         }
     }
 
+    const getTweetData = async() => {
+        const response = await axios.get(`/user/tweets/${id}`);
+
+        if(response.status === 200) {
+            console.log(response.data)
+            setTweetDetails(response.data);
+        }
+    }
+
     useEffect(() => {
+        getTweetData();
         setCommentData();
     },[])
 
     return (
         <div>
-            <Post
-                displayName="Ganesh ppk"
-                username="Ganesh ppk"
+            {tweetDetails.createdUser!= null ? <Post
+                displayName={tweetDetails.createdUser.name}
+                username={tweetDetails.createdUser.userName}
                 verified={true}
-                text="This is the most awesome tweet of the world!!!"
-                avatar="https://kajabi-storefronts-production.global.ssl.fastly.net/kajabi-storefronts-production/themes/284832/settings_images/rLlCifhXRJiT0RoN2FjK_Logo_roundbackground_black.png"
-                image="https://media.gq.com/photos/57eac35d9228bbed3f6f4ee5/16:9/w_2560%2Cc_limit/elon-musk-is-a-rocket.jpg"
-            />
+                text={tweetDetails.text}
+                avatar={tweetDetails.createdUser.avatar}
+                image={tweetDetails.image}
+                numOfLikes={tweetDetails.numberOFLikes}
+                numOfComments={tweetDetails.numberOfComments}
+                numOfTweets={tweetDetails.numberOFTweets}
+                tweetId={tweetDetails.tweetId}
+            /> : <div></div>}
 
             <div className="comments__header">
                 Comments
@@ -45,6 +60,7 @@ function DetailedPost() {
                         text={comment.commentText}
                         avatar="https://kajabi-storefronts-production.global.ssl.fastly.net/kajabi-storefronts-production/themes/284832/settings_images/rLlCifhXRJiT0RoN2FjK_Logo_roundbackground_black.png"
                         image=""
+                        isComment={true}
                     />
                 })
             }
