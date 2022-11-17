@@ -1,10 +1,11 @@
 .bar__card{
     display: flex;
-    gap: 10px;
-    margin-left: 50px;
+    gap: 5px;
+    margin-left: 5px;
     margin-top: 10px;
-    height: 170px;
-    width: 350px !important;
+    height: 70px;
+    width: 320px !important;
+    padding: 10px;
     box-shadow: 0 0 40px rgba(0,0,0,0.16);
     border-radius: 15px;
 }
@@ -16,21 +17,32 @@
 }
 
 .username{
-    font-size: 5px;    
+    font-size: 16px !important;    
+}
+
+.username ,
+.username__tag{
+    display: flex;
+}
+
+.header__text {
+    display: flex;
+    flex-direction: column;
 }
 
 .follow__btn{
+    height: 40px;
     width: 80px;
     border: 1px solid burlywood;
     margin-top: 15px;
     margin-left: 5px;
     margin-bottom: 5px;
-    padding: 12px;
-    border-radius: 20px;
-    background-color: black;
+    padding: 15px;
+    border-radius: 55px !important;
+    background-color: black !important;
+    cursor: pointer;
 }
 
-.follow__btn > h3 {
+.follow__btn {
     color: white;
-    cursor: pointer;
 }

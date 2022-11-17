@@ -23,11 +23,10 @@
 .twitter__icon{
     color: var(--twitter-color);
     font-size: 50px !important;
-    margin-left: 20px;
 }
 .twitter__handler{
-    margin: 0;
-    padding: 40;
+    display: flex;
+    margin-left: 15px;
 }
 
 .modal-box::-webkit-scrollbar {
