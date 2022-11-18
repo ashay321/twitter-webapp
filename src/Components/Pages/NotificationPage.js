@@ -12,7 +12,6 @@ export default function Notification() {
     let res= await axios.get(`/user/notification/${userId}`)
 
     setNotifications(res.data)
-    console.log(res.data)
   };
 
   useEffect(() => {
@@ -22,12 +21,13 @@ export default function Notification() {
   return (
     <div>
       <div className="notifications__bar">
-        <span className="header__secondary">Notification</span>
+        <span className="header__secondary">Notifications</span>
       </div>
 
       {
         notifications.map(notification => {
           return <NotificationCard 
+            key={notification.notificationId}
             avatar={notification.user.avatar}
             username={notification.user.userName}
             msg={notification.msg}

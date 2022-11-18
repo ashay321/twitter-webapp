@@ -1,5 +1,5 @@
 .header__secondary{
-    margin-left: 100px;
+    margin-left: 60px;
     font-size: 30px;
 }
 
@@ -8,7 +8,9 @@
     width: 550px;
 }
 
-
+.notifications__bar {
+    margin-top: 15px;
+}
 
 
 /* .notification__bar{
