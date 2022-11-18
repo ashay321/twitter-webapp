@@ -22,21 +22,28 @@ const Login = () => {
         type: "SET_USER",
         userId: userResponse.data.userId
       })
-      navigate("/home");
+
+      handleLocalStorage(userResponse.data.userId);
+      
+      userResponse.data.roles 
+      ? navigate("/admin")
+      : navigate("/home");
     } else {
       alert("Invalid username or password")
     }
   }
 
+
+  const handleLocalStorage = (user_id) => {
+    localStorage.setItem('userId', user_id)
+  }
+
   return (
     <div className="login-page">
       <div className="login-box">
-        <div className="illustration-wrapper">
-          <img
-          className="twitter__image" src={twitter} alt="Login" />
-        </div>
+        
         <Form name="login-form" initialValues={{ remember: true }}>
-          <p className="form-title">Welcome Elon</p>
+          <p className="form-title">Welcome</p>
           <p>Login to the Twitter Account</p>
           <Form.Item
             name="username"

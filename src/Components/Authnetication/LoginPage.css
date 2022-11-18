@@ -20,19 +20,24 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
+    /* min-height: 100vh; */
+    width: 100%;
   }
   .login-box {
     display: flex;
-    justify-content: space-between;
+
+    justify-content: center;
     align-items: center;
-    flex-direction: row-reverse;
+    flex-direction: column;
     max-width: 1000px;
     background-color: white;
     box-shadow: 0 0 40px rgba(0,0,0,0.16);
     overflow: hidden;
-    margin-left: auto;
+    /* margin-left: auto; */
     border-radius: 12px;
+  }
+  .login-box-header {
+    display: flex;
   }
   #login-form {
     flex: 1 0 100%;
@@ -110,4 +115,5 @@
   .signUp__here__btn{
     color: #50b7f5;
     cursor: pointer;
+    margin-left: 10px;
   }

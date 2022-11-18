@@ -22,143 +22,154 @@ import UsersRequestPage from "./Components/Authnetication/Admin/UsersRequestPage
 import UsersListPage from "./Components/Authnetication/Admin/UsersListPage";
 import MessagesPage from "./Components/Messages/MessagesPage";
 import { useStateValue } from "./StateProvider";
+import { useEffect } from "react";
 
 function App() {
-  const [{userId}] = useStateValue();
+  const [{ userId }, dispatch] = useStateValue();
+  const user_id = localStorage.getItem('userId');
+
+  useEffect(() => {
+    if (user_id !== null) {
+      dispatch({
+        type: "SET_USER",
+        userId: parseInt(user_id)
+      })
+    }
+  }, [])
 
   return (<div>
-        {
-          !userId 
-          ? <Router>
-            <Routes>
-              <Route
-                path="/login"
-                element={
-                  <div className="App">
-                    <LoginPage />
-                  </div>
-                }
-              />
+    {
+      !user_id
+        ? <Router>
+          <Routes>
+            <Route
+              path="/login"
+              element={
+                <div className="App">
+                  <LoginPage />
+                </div>
+              }
+            />
 
-              <Route
-                path="/signup"
-                element={
-                  <div className="App">
-                    <SignupPage />
-                  </div>
-                }
-              />
+            <Route
+              path="/signup"
+              element={
+                <div className="App">
+                  <SignupPage />
+                </div>
+              }
+            />
             <Route path="*" element={<Navigate to="/login" />} />
 
-            </Routes>
-          </Router> : 
-          
-          <Router><Routes>
-            <Route path="/admin" element={<AdminPage />} />
-        
-        <Route
-          path="/home"
-          element={
-            <div className="App">
-              <Sidebar />
-              <Feed />
-              <Widgets />
-            </div>
-          }
-        />
+          </Routes>
+        </Router> :
 
-        <Route
-          path="/messages"
-          element={
-            <div className="App">
-              <Sidebar />
-              <MessagesPage/>
-            </div>
-          }
-        />
+        <Router><Routes>
+          <Route path="/admin" element={<AdminPage />} />
 
-        <Route
-          path="/messages/:receiverId"
-          element={
-            <div className="App">
-              <Sidebar />
-              <MessagesPage/>
-            </div>
-          }
-        />
+          <Route
+            path="/home"
+            element={
+              <div className="App">
+                <Sidebar />
+                <Feed />
+                <Widgets />
+              </div>
+            }
+          />
 
-        <Route
-          path="/notifications"
-          element={
-            <div className="App">
-              <Sidebar />
-              <NotificationPage/>
-            </div>
-          }
-        />
+          <Route
+            path="/messages"
+            element={
+              <div className="App">
+                <Sidebar />
+                <MessagesPage />
+              </div>
+            }
+          />
 
-        <Route
-          path="/bookmarks"
-          element={
-            <div className="App">
-              <Sidebar />
-              <BookmarksPage/>
-            </div>
-          }
-        />
+          <Route
+            path="/messages/:receiverId"
+            element={
+              <div className="App">
+                <Sidebar />
+                <MessagesPage />
+              </div>
+            }
+          />
 
-        <Route
-          path="/profile"
-          element={
-            <div className="App">
-              <Sidebar />
-              <ProfilePage/>
-            </div>
-          }
-        />
+          <Route
+            path="/notifications"
+            element={
+              <div className="App">
+                <Sidebar />
+                <NotificationPage />
+              </div>
+            }
+          />
 
-        <Route
-          path="/settings"
-          element={
-            <div className="App">
-              <Sidebar />
-              <SettingsPage />
-            </div>
-          }
-        />
+          <Route
+            path="/bookmarks"
+            element={
+              <div className="App">
+                <Sidebar />
+                <BookmarksPage />
+              </div>
+            }
+          />
 
-        <Route
-          path="/tweet/:id"
-          element={
-            <div className="App">
-              <Sidebar />
-              <DetailedPost/>
-            </div>
-          }
-        />
+          <Route
+            path="/profile"
+            element={
+              <div className="App">
+                <Sidebar />
+                <ProfilePage />
+              </div>
+            }
+          />
 
-        <Route
-          path="/admin/requests"
-          element={
-            <div className="App">
-              <AdminPage children={<UsersRequestPage/>}/>
-            </div>
-          }
-        />
+          <Route
+            path="/settings"
+            element={
+              <div className="App">
+                <Sidebar />
+                <SettingsPage />
+              </div>
+            }
+          />
 
-        <Route
-          path="/admin/users"
-          element={
-            <div className="App">
-              <AdminPage children={<UsersListPage/>}/>
-            </div>
-          }
-        />
+          <Route
+            path="/tweet/:id"
+            element={
+              <div className="App">
+                <Sidebar />
+                <DetailedPost />
+              </div>
+            }
+          />
 
-        <Route path="*" element={<Navigate to="/home" />} />
-            </Routes></Router>
-        } 
-    </div>
+          <Route
+            path="/admin/requests"
+            element={
+              <div className="App">
+                <AdminPage children={<UsersRequestPage />} />
+              </div>
+            }
+          />
+
+          <Route
+            path="/admin/users"
+            element={
+              <div className="App">
+                <AdminPage children={<UsersListPage />} />
+              </div>
+            }
+          />
+
+          <Route path="*" element={<Navigate to="/home" />} />
+        </Routes></Router>
+    }
+  </div>
   );
 }
 
