@@ -9,7 +9,6 @@ function UsersPage() {
     let response = await axios.get("/user")
 
     if(response.status === 200) {
-      // console.log(respo)
       setUsers(response.data);
     }
   }
@@ -35,7 +34,7 @@ function UsersPage() {
         <tbody>
           {
             users.map(user => {
-              return <tr>
+              return <tr key={user.userId}>
                 <td>{user.name}</td>
                 <td>{user.dob}</td>
                 <td>{user.userName}</td>
