@@ -25,7 +25,6 @@ function TweetBox() {
                 "image":imageUrl
             }
         })
-        console.log(response.status);
         if(response.status === 201) {
             setProgress(0);
             setImage(null);
@@ -37,7 +36,6 @@ function TweetBox() {
     }
 
     const handleUpload = () => {
-        console.log("hiiiiii")
         const storageRef = ref(storage, `images/${image.name}`);
         const uploadTask = uploadBytesResumable(storageRef, image);
         
@@ -50,13 +48,11 @@ function TweetBox() {
                 setProgress(progress);
             },
             (error) => {
-                console.log(error);
                 alert(error.message);
             },
             () => {
 
                     getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-                        console.log('File available at', downloadURL);
                         postNewTweet(downloadURL)
                         
                     });

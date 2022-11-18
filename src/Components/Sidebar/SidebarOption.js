@@ -7,7 +7,6 @@ export default function SidebarOption({ active, text, Icon, navigationPath }) {
     <div
       className={`sidebarOptions ${active && "sidebarOptions__active"}`}
        onClick={() => {
-        console.log(navigationPath);
         navigate(navigationPath);
       }}
     >
