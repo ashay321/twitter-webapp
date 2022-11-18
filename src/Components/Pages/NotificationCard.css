@@ -4,7 +4,7 @@
     margin-left: 50px;
     margin-top: 10px;
     height: 70px;
-    width: 500px;
+    min-width: 600px;
     box-shadow: 0 0 40px rgba(0,0,0,0.16);
     border-radius: 5px;
 }
