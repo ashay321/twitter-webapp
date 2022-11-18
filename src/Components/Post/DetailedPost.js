@@ -3,6 +3,8 @@ import { useParams } from "react-router-dom";
 import Post from './Post';
 import axios from "../../axios"
 import './DetailedPost.css'
+import { Button } from '@mui/material';
+import AddCommentBox from '../AddComment/AddCommentBox';
 
 function DetailedPost() {
     const { id } = useParams();
@@ -13,7 +15,6 @@ function DetailedPost() {
         const response = await axios.get(`/user/tweets/${id}/comments`);
 
         if(response.status === 200) {
-            console.log(response.data)
             setComments(response.data);
         }
     }
@@ -22,7 +23,6 @@ function DetailedPost() {
         const response = await axios.get(`/user/tweets/${id}`);
 
         if(response.status === 200) {
-            console.log(response.data)
             setTweetDetails(response.data);
         }
     }
@@ -37,7 +37,7 @@ function DetailedPost() {
             {tweetDetails.createdUser!= null ? <Post
                 displayName={tweetDetails.createdUser.name}
                 username={tweetDetails.createdUser.userName}
-                verified={true}
+                verified={tweetDetails.createdUser.isVerified === 3 ? true : false}
                 text={tweetDetails.text}
                 avatar={tweetDetails.createdUser.avatar}
                 image={tweetDetails.image}
@@ -47,6 +47,7 @@ function DetailedPost() {
                 tweetId={tweetDetails.tweetId}
             /> : <div></div>}
 
+            <AddCommentBox tweetId={tweetDetails.tweetId} setCommentsData={setCommentData}/>
             <div className="comments__header">
                 Comments
             </div>
@@ -54,9 +55,10 @@ function DetailedPost() {
             {
                 comments.map(comment => {
                     return <Post
-                        displayName="Ganesh ppk"
-                        username="Ganesh ppk"
-                        verified={true}
+                        key={comment.commentId}
+                        displayName={comment.user.name}
+                        username={comment.user.userName}
+                        verified={comment.user.isVerified === 3 ? true : false}
                         text={comment.commentText}
                         avatar="https://kajabi-storefronts-production.global.ssl.fastly.net/kajabi-storefronts-production/themes/284832/settings_images/rLlCifhXRJiT0RoN2FjK_Logo_roundbackground_black.png"
                         image=""

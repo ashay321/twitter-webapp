@@ -14,7 +14,7 @@ import { async } from "@firebase/util";
 import axios from "../../axios";
 import { useNavigate } from "react-router-dom";
 import { useStateValue } from "../../StateProvider";
-import AddCommentBox from "../AddComment/AddCommentBox";
+import AddCommentBox from "../AddComment/AddCommentBox"
 
 const Post = forwardRef(
   ({ displayName, username, verified, text, image, avatar, tweetId, numOfLikes, numOfComments, numOfTweets, isComment=false }, ref) => {
@@ -84,7 +84,7 @@ const Post = forwardRef(
           <Avatar src={avatar} />
         </div>
         <div className="post__body">
-          <div className="post__header" onClick={() => navigate(`/tweet/${tweetId}` )}>
+          <div className="post__header">
             <div className="post__headerText">
               <h3>
                 {displayName}{" "}
@@ -106,7 +106,7 @@ const Post = forwardRef(
           {
           !isComment ? <div className="post__footer">
             <div className="post__conversations">
-              <IconButton onClick={() => setCommentBox(true)}><ChatBubbleOutlineIcon fontSize="small" /></IconButton>
+              <IconButton onClick={() => navigate(`/tweet/${tweetId}` )}><ChatBubbleOutlineIcon fontSize="small" /></IconButton>
               <span>{numberOfComments}</span>
             </div>
             
