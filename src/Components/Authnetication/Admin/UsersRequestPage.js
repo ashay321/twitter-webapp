@@ -2,14 +2,13 @@ import React, { useEffect, useState } from "react";
 import Button from "@mui/material/Button";
 import "./UsersRequestPage.css";
 import axios from "../../../axios"
-import { async } from "@firebase/util";
 
 function UsersRequestPage() {
 
   const [verificationRequests, setVerificationRequests] = useState([]);
 
   const getVerificationRequests = async() => {
-    let response = await axios.get("/user/bluetick");
+    let response = await axios.get("/admin/bluetick");
 
     if(response.status === 200) {
       setVerificationRequests(response.data)
@@ -17,12 +16,13 @@ function UsersRequestPage() {
   }
 
   const acceptVerificationRequest = async(userIdToBeVerified) => {
-    let response = await axios.get(`/user/bluetick/status/${userIdToBeVerified}`);
-
+    let response = await axios.put(`/admin/bluetick/status/${userIdToBeVerified}/true`);
+    getVerificationRequests();
   }
 
-  const rejectVerificationRequest = () => {
-    
+  const rejectVerificationRequest = async(userIdToBeVerified) => {
+    let response = await axios.put(`/admin/bluetick/status/${userIdToBeVerified}/false`);
+    getVerificationRequests();
   }
 
   useEffect(() => {
@@ -42,12 +42,12 @@ function UsersRequestPage() {
         <tbody>
           {
             verificationRequests.map((request) => {
-              return <tr>
+              return <tr key={request.userId}>
                 <td>{request.name}</td>
                 <td>Request</td>
                 <td>
-                  <Button style={{marginRight: 10}} variant="contained" color="primary" component="span" onClick={acceptVerificationRequest}>Accept</Button>
-                  <Button style={{marginRight: 10}} variant="contained" color="primary" component="span" onClick={rejectVerificationRequest}>Decline</Button>
+                  <Button style={{marginRight: 10}} variant="contained" color="primary" component="span" onClick={() => acceptVerificationRequest(request.userId)}>Accept</Button>
+                  <Button style={{marginRight: 10}} variant="contained" color="primary" component="span" onClick={() => rejectVerificationRequest(request.userId)}>Decline</Button>
                 </td>
               </tr>
             })
