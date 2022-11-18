@@ -18,9 +18,9 @@
     margin-left: 20px;
 }
 
-.widgets__input > input, input:hover {
+.widgets__input > form > input, input:hover {
     border: none;
-    /* background-color: var(--twitter-color); */
+    background-color: var(--twitter-background);
 }
 
 .widgets__searchIcon{

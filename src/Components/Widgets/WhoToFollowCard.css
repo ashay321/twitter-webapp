@@ -1,4 +1,4 @@
-.bar__card{
+.follow__card{
     display: flex;
     gap: 5px;
     margin-left: 5px;
@@ -8,6 +8,8 @@
     padding: 10px;
     box-shadow: 0 0 40px rgba(0,0,0,0.16);
     border-radius: 15px;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .avatar{
@@ -32,8 +34,8 @@
 
 .follow__btn{
     height: 40px;
-    width: 80px;
-    border: 1px solid burlywood;
+    width: 100px;
+    /* border: 1px solid burlywood; */
     margin-top: 15px;
     margin-left: 5px;
     margin-bottom: 5px;
@@ -45,4 +47,11 @@
 
 .follow__btn {
     color: white;
+}
+
+.follow__card__info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px
 }

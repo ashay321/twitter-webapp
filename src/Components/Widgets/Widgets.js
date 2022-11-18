@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Widgets.css";
 import SearchIcon from "@mui/icons-material/Search";
 import {
@@ -10,13 +10,54 @@ import {
   TwitterFollowButton,
 } from "react-twitter-embed";
 import WhoToFollow from "./WhoToFollow";
+import axios from '../../axios'
+import { async } from "@firebase/util";
+import { useStateValue } from "../../StateProvider";
 
 function Widgets() {
+  const [searchData, setSearchData] = useState([]);
+  const [trendingData, setTrendingData] = useState([]);
+  const [keyword, setKeyword ] = useState("");
+  const [followings, setFollowings] = useState([]);
+  const [{userId}, dispatch] = useStateValue();
+
+  const getSearchData =async(e) => {
+    e.preventDefault();
+    let response = await axios.get(`/user/search/${keyword}`);
+
+    if(response.status === 200) {
+      setSearchData(response.data)
+    }
+  }
+
+  const getTrendingData = async() => {
+    let response = await axios.get(`/user/trending`);
+
+    if(response.status === 200) {
+      setSearchData(response.data)
+    }
+  }
+
+  const getFollowingsData = async() => {
+    let response = await axios.get(`/user/${userId}/followings`);
+    if(response.status === 200) {
+      setFollowings(response.data);
+    }
+  }
+
+  useEffect(() => {
+    getFollowingsData();
+    getTrendingData();
+  }, [])
+
   return (
     <div className="widgets">
       <div className="widgets__input">
         <SearchIcon className="widgets__searchIcon" />
-        <input type="text" placeholder="Search Twitter" className="input" />
+        <form>
+          <input type="text" placeholder="Search Twitter" className="input" value={keyword} onChange={(e) => setKeyword(e.target.value)}/>
+          <button style={{display:'none'}} type="submit" onClick={getSearchData}></button>
+        </form>
       </div>
       {/* <div className="widgets__widgetContainer">
         <h2>What's happening</h2>
@@ -31,7 +72,7 @@ function Widgets() {
         <TwitterFollowButton />
       </div> */}
       <div className="who_to__follow">
-          <WhoToFollow />
+          <WhoToFollow data={searchData} followings={followings}/>
       </div>
     </div>
   );
