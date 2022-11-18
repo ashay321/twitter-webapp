@@ -14,7 +14,6 @@ function ExplorePage() {
       method: 'get',
       url: `/user/tweets`,
     })
-    console.log(response.data);
     setFeed(response.data);
   }
 
@@ -31,6 +30,7 @@ function ExplorePage() {
       {
         feed?.map(post => {
           return <Post
+            key={post.tweetId}
             displayName={post.createdUser.name}
             username={post.createdUser.userName}
             verified={post.isVerified ? true : false}

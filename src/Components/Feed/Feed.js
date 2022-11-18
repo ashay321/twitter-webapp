@@ -13,9 +13,9 @@ function Feed() {
 
     const response = await axios({
       method: 'get',
-      url: `/user/${userId}/feeds`,
+      // url: `/user/${userId}/feeds`,
+      url: `/user/tweets`,
     })
-    console.log(response.data);
     setFeed(response.data);
   }
 
@@ -32,9 +32,10 @@ function Feed() {
       {
         feed?.map(post => {
           return <Post
+            key={post.tweetId}
             displayName={post.createdUser.name}
             username={post.createdUser.userName}
-            verified={post.isVerified ? true : false}
+            verified={post.createdUser.isVerified===3 ? true : false}
             text={post.text}
             avatar={post.createdUser.avatar}
             image={post.image}

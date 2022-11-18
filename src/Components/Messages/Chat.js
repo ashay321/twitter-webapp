@@ -17,11 +17,9 @@ function Chat() {
     const [{userId}, dispatch] = useStateValue();
 
     const getAllMessages = async() => {
-        console.log(receiverId);
         let response = await axios.get(`/user/message/${userId}/${receiverId}`);
 
         if(response.status === 200) {
-            console.log(response.data.length)
             setMessages(response.data);
         }
     }
@@ -84,7 +82,7 @@ function Chat() {
 
             <div className="chat__body">
                 {messages.map(message => (            
-                    <p className={`chat__message ${ message.senderId === userId && 'chat__receiver'}`}>
+                    <p key={message.messageId} className={`chat__message ${ message.senderId === userId && 'chat__receiver'}`}>
                         <span className="chat__name">{message.sender.name}</span>
                         {message.text}
                         <span className="chat__timestamp">{new Date(message.messageDate).toUTCString()}</span>

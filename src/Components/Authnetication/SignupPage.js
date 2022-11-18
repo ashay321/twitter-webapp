@@ -15,7 +15,6 @@ function SignupPage() {
   // const [] = React.useState("")
 
   const signup = async() => {
-    console.log("I am here..")
     const data = {
       userName:username,
       name:name,

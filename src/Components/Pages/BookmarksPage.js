@@ -14,7 +14,6 @@ function BookmarksPage() {
       method: 'get',
       url: `/user/bookmark/1`,
     })
-    console.log(response.data);
     setFeed(response.data);
   }
 
@@ -31,6 +30,7 @@ function BookmarksPage() {
       {
         feed?.map(bookmark => {
           return <Post
+            key={bookmark.tweet.tweetId}
             displayName={bookmark.tweet.createdUser.name}
             username={bookmark.tweet.createdUser.userName}
             verified={bookmark.tweet.isVerified ? true : false}
